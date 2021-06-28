@@ -1,3 +1,15 @@
 mixin project(proj)
-  p=proj.data.title
-  a(href="http://" + proj.data.GHLink) View on Github
+  .project
+    p=proj.data.title
+    img(src=proj.data.image, alt="Website screenshot")
+    if proj.data.githubLink
+      a(href=proj.data.githubLink target="_blank") View on Github
+    if proj.data.liveLink 
+      a(href=proj.data.liveLink target="_blank") View live
+
+    p=proj.data.description
+    if proj.data.techStack 
+      p Tech Stack
+      each tech in proj.data.techStack 
+        ul 
+          li=tech
