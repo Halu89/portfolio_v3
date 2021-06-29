@@ -1,0 +1,28 @@
+@use "../variables/colors" as *;
+
+nav {
+  background: linear-gradient(to right, $bg, $main-color);
+  display: flex;
+  align-items: center;
+  position: sticky;
+  top: 0;
+  img.logo {
+    width: 8rem;
+    padding: 1rem;
+    margin-left: 2rem;
+  }
+  .navlinks {
+    display: flex;
+    list-style: none;
+    margin-left: auto;
+    li {
+      padding: 0.5rem 2rem;
+
+      a.navlink {
+        text-decoration: none;
+        font-size: 2rem;
+        color: $light-color;
+      }
+    }
+  }
+}

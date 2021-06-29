@@ -1,18 +1,23 @@
 {
   "name": "portfolio_v3",
   "version": "1.0.0",
+  "private": true,
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev":"npx @11ty/eleventy --serve",
-    "build":"npx @11ty/eleventy",
+    "dev": "npx @11ty/eleventy --serve",
+    "build": "npx @11ty/eleventy ELEVENTY_ENV=production",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
   "author": "Corentin Briand <corentin.briand@gmail.com>",
   "license": "ISC",
-  "dependencies": {},
+  "dependencies": {
+    "three": "^0.129.0"
+  },
   "devDependencies": {
-    "@11ty/eleventy": "^0.12.1"
+    "@11ty/eleventy": "^0.12.1",
+    "webpack": "^5.41.1",
+    "webpack-cli": "^4.7.2"
   }
 }

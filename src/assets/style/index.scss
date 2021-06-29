@@ -1,3 +1,27 @@
+// Import variables
+@use "./variables/colors" as *;
+@use "./utils/typography";
+
+// CSS reset by Adny Bell https://piccalil.li/blog/a-modern-css-reset/
+@use "./utils/reset.scss";
+
+// Sections
+@use "./sections/navbar";
+@use "./sections/hero";
+@use "./sections/projects";
+@use "./sections/contact";
+@use "./sections/footer";
+
 html {
-  background:rgb(231, 231, 231);
+  background: $bg;
+}
+
+body {
+  display: grid;
+  nav {
+    height: 5rem;
+  }
+  section {
+    min-height: calc(100vh - 5rem);
+  }
 }
