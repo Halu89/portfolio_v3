@@ -1,7 +1,8 @@
 mixin project(proj)
+  - const image = proj.data.image || "/assets/images/projects/default.png";
   .project
-    p=proj.data.title
-    img(src=proj.data.image, alt="Website screenshot")
+    h2=proj.data.title
+    img(src=image, alt="Website screenshot")
     if proj.data.githubLink
       a(href=proj.data.githubLink target="_blank") View on Github
     if proj.data.liveLink 
