@@ -1,68 +1,117 @@
-import * as THREE from "three"
+import {
+  WebGLRenderer,
+  PerspectiveCamera,
+  Scene,
+  BoxGeometry,
+  SphereGeometry,
+  DirectionalLight,
+  MeshPhongMaterial,
+  MeshBasicMaterial,
+  Mesh,
+  TextureLoader,
+  RepeatWrapping,
+  NearestFilter,
+  PlaneGeometry,
+  DoubleSide,
+} from 'three';
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
+import * as THREE from 'three';
+import * as dat from 'dat.gui';
+
+class ColorGUIHelper {
+  constructor(object, prop) {
+    (this.object = object), (this.prop = prop);
+  }
+  get value() {
+    return `#${this.object[this.prop].getHexString()}`;
+  }
+  set value(hexString) {
+    this.object[this.prop].set(hexString);
+  }
+}
 
 function main() {
   const canvas = document.querySelector('#c');
-  const renderer = new THREE.WebGLRenderer({ canvas });
+  const renderer = new WebGLRenderer({ canvas });
 
   // Renderer
   renderer.setSize(600, 400);
 
   // Camera
-  const fov = 75;
+  const fov = 45;
   const aspect = 600 / 400; // the canvas default
   const near = 0.1;
-  const far = 5;
-  const camera = new THREE.PerspectiveCamera(fov, aspect, near, far);
-  camera.position.z = 3;
+  const far = 30;
+  const camera = new PerspectiveCamera(fov, aspect, near, far);
+  camera.position.set(0, 5, 12);
+  //Controls
+  const controls = new OrbitControls(camera, canvas);
+  controls.target.set(0, 0, 0);
+  controls.update();
 
   // Scene
-  const scene = new THREE.Scene();
-
-  const boxWidth = 1;
-  const boxHeight = 1;
-  const boxDepth = 1;
-  const geometry = new THREE.BoxGeometry(boxWidth, boxHeight, boxDepth);
+  const scene = new Scene();
 
   // Light
   const color = 0xffffff;
   const intensity = 1;
-  const light = new THREE.DirectionalLight(color, intensity);
-  light.position.set(-1, 2, 4);
+  const light = new THREE.AmbientLight(color, intensity);
+
   scene.add(light);
 
+  // Floor
+  // Texture
+  const loader = new TextureLoader();
+  const planeSize = 20;
+
+  const texture = loader.load('/resources/images/checker.png');
+  texture.wrapS = RepeatWrapping;
+  texture.wrapT = RepeatWrapping;
+  texture.magFilter = NearestFilter;
+  const repeats = planeSize / 2;
+  texture.repeat.set(repeats, repeats);
+
   // Mesh
-  const material = new THREE.MeshPhongMaterial({ color: 0x44aa88 }); // greenish blue
+  const floorColor = document.querySelector("#hero").style
+  
+  console.log(floorColor);
+  const planeGeo = new PlaneGeometry(planeSize, planeSize);
+  const planeMat = new MeshBasicMaterial({ color: 0x555555 });
+  const mesh = new Mesh(planeGeo, planeMat);
+  mesh.rotation.x = Math.PI * -0.5;
+  mesh.position.y -= 4;
+  scene.add(mesh);
 
-  const cube = new THREE.Mesh(geometry, material);
-  // scene.add(cube);
+  // Debug
+  const gui = new dat.GUI();
+  gui.addColor(new ColorGUIHelper(light, 'color'), 'value').name('color');
+  gui.add(light, 'intensity', 0, 2, 0.01);
 
-  // Add cubes
-  function makeInstance(geometry, color, x) {
-    const material = new THREE.MeshPhongMaterial({ color });
+  // Objects
 
-    const cube = new THREE.Mesh(geometry, material);
-    scene.add(cube);
+  loader.setPath('/assets/images/cubefaces/');
 
-    cube.position.x = x;
+  const materials = [
+    'html.png',
+    'js.png',
+    'mongo.png',
+    'node.png',
+    'react.png',
+    'sass.png',
+  ].map(img => new MeshPhongMaterial({ map: loader.load(img) }));
 
-    return cube;
-  }
-  const cubes = [
-    makeInstance(geometry, 0x44aa88, 0),
-    makeInstance(geometry, 0x8844aa, -2),
-    makeInstance(geometry, 0xaa8844, 2),
-  ];
+  const cubeLength = 3;
+  const cubeGeo = new BoxGeometry(cubeLength, cubeLength, cubeLength);
+  const cube = new Mesh(cubeGeo, materials);
+
+  scene.add(cube);
 
   // Animate
   function render(time) {
-    time *= 0.001; // convert time to seconds
+    time *= 0.0005; // convert time to seconds
 
-    cubes.forEach((cube, ndx) => {
-      const speed = 1 + ndx * 0.1;
-      const rot = time * speed;
-      cube.rotation.x = rot;
-      cube.rotation.y = rot;
-    });
+    cube.rotation.x = time;
+    cube.rotation.y = time;
 
     renderer.render(scene, camera);
 

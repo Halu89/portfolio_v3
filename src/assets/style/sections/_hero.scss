@@ -1,4 +1,7 @@
+@use "../variables/colors" as *;
+
 #hero {
   display: grid;
   place-items: center;
+  background-color: $bg;
 }

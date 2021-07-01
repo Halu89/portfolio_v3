@@ -109,6 +109,7 @@ nav .navlinks li a.navlink {
 #hero {
   display: grid;
   place-items: center;
+  background-color: #e7e7e7;
 }
 
 #projects img {
