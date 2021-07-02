@@ -33,6 +33,11 @@ class ColorGUIHelper {
 function main() {
   const canvas = document.querySelector('#c');
   const renderer = new WebGLRenderer({ canvas });
+  renderer.shadowMap.enabled = true;
+  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+  const bgColor = window.getComputedStyle(
+    document.querySelector('#hero')
+  ).backgroundColor;
 
   // Renderer
   renderer.setSize(600, 400);
@@ -51,43 +56,55 @@ function main() {
 
   // Scene
   const scene = new Scene();
+  scene.background = new THREE.Color(bgColor);
 
   // Light
-  const color = 0xffffff;
-  const intensity = 1;
-  const light = new THREE.AmbientLight(color, intensity);
+  // Ambient light to approximate refraction
+  scene.add(new THREE.AmbientLight(0x888888));
 
+  const color = 0xffffff;
+  const intensity = .6;
+  const light = new THREE.SpotLight(color, intensity);
+  light.position.y = 12;
+  light.castShadow = true;
+  light.shadow.camera.far = 100;
+  // Augment shadow resolution
+  light.shadow.mapSize = new THREE.Vector2(1024, 1024);
   scene.add(light);
+
+  // Visualize shadow
+  const cameraHelper = new THREE.CameraHelper(light.shadow.camera);
+  scene.add(cameraHelper);
+
+  // Objects
+  // (Texture + Geometry) -> Material => Add to scene
 
   // Floor
   // Texture
   const loader = new TextureLoader();
   const planeSize = 20;
 
-  const texture = loader.load('/resources/images/checker.png');
-  texture.wrapS = RepeatWrapping;
-  texture.wrapT = RepeatWrapping;
-  texture.magFilter = NearestFilter;
-  const repeats = planeSize / 2;
-  texture.repeat.set(repeats, repeats);
+  // const texture = loader.load('/resources/images/checker.png');
+  // texture.wrapS = RepeatWrapping;
+  // texture.wrapT = RepeatWrapping;
+  // texture.magFilter = NearestFilter;
+  // const repeats = planeSize / 2;
+  // texture.repeat.set(repeats, repeats);
 
-  // Mesh
-  const floorColor = document.querySelector("#hero").style
-  
-  console.log(floorColor);
   const planeGeo = new PlaneGeometry(planeSize, planeSize);
-  const planeMat = new MeshBasicMaterial({ color: 0x555555 });
-  const mesh = new Mesh(planeGeo, planeMat);
-  mesh.rotation.x = Math.PI * -0.5;
-  mesh.position.y -= 4;
-  scene.add(mesh);
+  const planeMat = new THREE.MeshLambertMaterial({
+    color: new THREE.Color(bgColor),
+  });
+  const planeMesh = new Mesh(planeGeo, planeMat);
+  planeMesh.rotation.x = Math.PI * -0.5; // Set the plane parallel to the ground
+  planeMesh.position.y -= 4;
+  planeMesh.receiveShadow = true;
+  scene.add(planeMesh);
 
   // Debug
   const gui = new dat.GUI();
   gui.addColor(new ColorGUIHelper(light, 'color'), 'value').name('color');
   gui.add(light, 'intensity', 0, 2, 0.01);
-
-  // Objects
 
   loader.setPath('/assets/images/cubefaces/');
 
@@ -103,7 +120,7 @@ function main() {
   const cubeLength = 3;
   const cubeGeo = new BoxGeometry(cubeLength, cubeLength, cubeLength);
   const cube = new Mesh(cubeGeo, materials);
-
+  cube.castShadow = true;
   scene.add(cube);
 
   // Animate
