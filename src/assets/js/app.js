@@ -3,20 +3,20 @@ import {
   PerspectiveCamera,
   Scene,
   BoxGeometry,
-  SphereGeometry,
-  DirectionalLight,
   MeshPhongMaterial,
-  MeshBasicMaterial,
   Mesh,
   TextureLoader,
-  RepeatWrapping,
-  NearestFilter,
   PlaneGeometry,
-  DoubleSide,
+  ShadowMaterial,
+  PCFSoftShadowMap,
+  Color,
+  Vector2,
+  AmbientLight,
+  SpotLight,
 } from 'three';
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import * as THREE from 'three';
-import * as dat from 'dat.gui';
+import { TransformControls } from 'three/examples/jsm/controls/TransformControls';
+
+import SpinControls from './SpinControls';
 
 class ColorGUIHelper {
   constructor(object, prop) {
@@ -30,112 +30,180 @@ class ColorGUIHelper {
   }
 }
 
-function main() {
-  const canvas = document.querySelector('#c');
-  const renderer = new WebGLRenderer({ canvas });
-  renderer.shadowMap.enabled = true;
-  renderer.shadowMap.type = THREE.PCFSoftShadowMap;
+let scene, renderer, camera, control;
+let cube;
+let interacting = false;
+let direction = 1;
+const canvas = document.querySelector('#c');
+
+init();
+render();
+
+function init() {
+  // window.addEventListener('resize', onWindowResize); // FIXME cube vertical oscillation speeds up on window resize.
+
   const bgColor = window.getComputedStyle(
     document.querySelector('#hero')
   ).backgroundColor;
 
+  renderer = new WebGLRenderer({ canvas });
+  renderer.shadowMap.enabled = true;
+  // Add Anti-aliasing to the shadow
+  renderer.shadowMap.type = PCFSoftShadowMap;
+
   // Renderer
-  renderer.setSize(600, 400);
+  renderer.setSize(600, 400); //TODO : Dynamically adjust
 
   // Camera
-  const fov = 45;
-  const aspect = 600 / 400; // the canvas default
-  const near = 0.1;
-  const far = 30;
-  const camera = new PerspectiveCamera(fov, aspect, near, far);
-  camera.position.set(0, 5, 12);
-  //Controls
-  const controls = new OrbitControls(camera, canvas);
-  controls.target.set(0, 0, 0);
-  controls.update();
+  {
+    const fov = 45;
+    const aspect = getAspect(canvas);
+    const near = 0.1;
+    const far = 30;
+    camera = new PerspectiveCamera(fov, aspect, near, far);
+    camera.position.set(3, 5, 12);
+    camera.lookAt(0, 0, 0);
+  }
 
   // Scene
-  const scene = new Scene();
-  scene.background = new THREE.Color(bgColor);
+  scene = new Scene();
+  scene.background = new Color(bgColor);
 
-  // Light
+  // Lights
   // Ambient light to approximate refraction
-  scene.add(new THREE.AmbientLight(0x888888));
+  scene.add(new AmbientLight(0xffffff, 0.8));
 
+  // Spotlight casting a shadow
   const color = 0xffffff;
-  const intensity = .6;
-  const light = new THREE.SpotLight(color, intensity);
+  const intensity = 0.6;
+  const light = new SpotLight(color, intensity);
   light.position.y = 12;
   light.castShadow = true;
   light.shadow.camera.far = 100;
   // Augment shadow resolution
-  light.shadow.mapSize = new THREE.Vector2(1024, 1024);
+  light.shadow.mapSize = new Vector2(1024, 1024);
   scene.add(light);
 
-  // Visualize shadow
-  const cameraHelper = new THREE.CameraHelper(light.shadow.camera);
-  scene.add(cameraHelper);
-
   // Objects
-  // (Texture + Geometry) -> Material => Add to scene
+  // (Material + Geometry) -> Mesh => Add to scene
 
   // Floor
-  // Texture
-  const loader = new TextureLoader();
-  const planeSize = 20;
+  {
+    const planeSize = 20;
+    const planeGeo = new PlaneGeometry(planeSize, planeSize);
+    const planeMat = new ShadowMaterial({ opacity: 0.2 }); // Only receive shadows
+    const planeMesh = new Mesh(planeGeo, planeMat);
+    planeMesh.rotation.x = Math.PI * -0.5; // Set the plane parallel to the ground
+    planeMesh.position.y -= 4;
+    planeMesh.receiveShadow = true;
+    scene.add(planeMesh);
+  }
 
-  // const texture = loader.load('/resources/images/checker.png');
-  // texture.wrapS = RepeatWrapping;
-  // texture.wrapT = RepeatWrapping;
-  // texture.magFilter = NearestFilter;
-  // const repeats = planeSize / 2;
-  // texture.repeat.set(repeats, repeats);
+  // Cube
+  {
+    // Not using CubeTextureLoader because of weird texture stretching
+    const loader = new TextureLoader();
+    loader.setPath('/assets/images/cubefaces/');
 
-  const planeGeo = new PlaneGeometry(planeSize, planeSize);
-  const planeMat = new THREE.MeshLambertMaterial({
-    color: new THREE.Color(bgColor),
-  });
-  const planeMesh = new Mesh(planeGeo, planeMat);
-  planeMesh.rotation.x = Math.PI * -0.5; // Set the plane parallel to the ground
-  planeMesh.position.y -= 4;
-  planeMesh.receiveShadow = true;
-  scene.add(planeMesh);
+    // Load the 6 cube faces and put them in an array
+    const materials = [
+      'html.png',
+      'js.png',
+      'mongo.png',
+      'node.png',
+      'react.png',
+      'sass.png',
+    ].map(img => new MeshPhongMaterial({ map: loader.load(img) }));
+
+    const cubeLength = 3;
+    const cubeGeo = new BoxGeometry(cubeLength, cubeLength, cubeLength);
+    cube = new Mesh(cubeGeo, materials);
+    cube.castShadow = true;
+    scene.add(cube);
+  }
+
+  //Controls
+  {
+    control = new SpinControls(cube, 3, camera, canvas);
+    // control.setMode('rotate');
+    // // Hide controls
+    // control.showX = false;
+    // control.showY = false;
+    // control.showZ = false;
+
+    // Stop rotation if interacting grabbing the cube
+    control.addEventListener('mouseDown', () => {
+      interacting = true;
+    });
+    control.addEventListener('mouseUp', () => {
+      interacting = false;
+    });
+
+    // Augment the "grabbable" space around the cube
+    // control.size = 2.5;
+
+    // control.attach(cube);
+    // scene.add(control);
+  }
 
   // Debug
-  const gui = new dat.GUI();
-  gui.addColor(new ColorGUIHelper(light, 'color'), 'value').name('color');
-  gui.add(light, 'intensity', 0, 2, 0.01);
 
-  loader.setPath('/assets/images/cubefaces/');
+  // Visualize light
+  // const cameraHelper = new CameraHelper(light.shadow.camera);
+  // scene.add(cameraHelper);
 
-  const materials = [
-    'html.png',
-    'js.png',
-    'mongo.png',
-    'node.png',
-    'react.png',
-    'sass.png',
-  ].map(img => new MeshPhongMaterial({ map: loader.load(img) }));
-
-  const cubeLength = 3;
-  const cubeGeo = new BoxGeometry(cubeLength, cubeLength, cubeLength);
-  const cube = new Mesh(cubeGeo, materials);
-  cube.castShadow = true;
-  scene.add(cube);
-
-  // Animate
-  function render(time) {
-    time *= 0.0005; // convert time to seconds
-
-    cube.rotation.x = time;
-    cube.rotation.y = time;
-
-    renderer.render(scene, camera);
-
-    requestAnimationFrame(render);
-  }
+  // const gui = new dat.GUI();
+  // gui.addColor(new ColorGUIHelper(light, 'color'), 'value').name('color');
+  // gui.add(light, 'intensity', 0, 2, 0.01);
 
   requestAnimationFrame(render);
 }
 
-main();
+function onWindowResize() {
+  camera.aspect = getAspect(canvas);
+  camera.updateProjectionMatrix();
+  render();
+}
+
+function getAspect(domElement) {
+  const { height, width } = window.getComputedStyle(domElement);
+
+  // Remove the unit
+  const re = new RegExp(/\d+\.?\d+/);
+  const h = Number(height.match(re));
+  const w = Number(width.match(re));
+
+  return w / h;
+}
+
+// Animate
+function render(time) {
+  time *= 0.0005; // convert time to seconds
+  control.update();
+  let speed = 0.005;
+  if (!interacting) {
+    const k = 5;
+    const interval = 3;
+
+    if (Math.floor(k * time) % (k * interval) === 0) {
+      // Accelerate rotation for interval/k seconds every interval seconds.
+      speed *= 15;
+    }
+    cube.rotation.x += speed;
+    cube.rotation.y += 2 * speed;
+
+    // Oscillate with -2 < y < 2;
+    if (cube.position.y > 2) {
+      direction = -1;
+    }
+    if (cube.position.y < -2) {
+      direction = 1;
+    }
+    cube.position.y +=
+      direction * 0.01 * (1 + Math.abs(Math.abs(cube.position.y) - 2));
+  }
+
+  renderer.render(scene, camera);
+
+  requestAnimationFrame(render);
+}
