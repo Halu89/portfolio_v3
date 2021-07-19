@@ -1,0 +1,1 @@
+[ ] Adjust the scrolling point when clicking on navbar

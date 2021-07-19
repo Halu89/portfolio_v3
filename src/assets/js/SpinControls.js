@@ -191,6 +191,7 @@ var SpinControls = function (object, trackBallRadius, camera, domElement) {
     }
   };
 
+  // Ndc : Normalized device coordinates
   var getPointerInNdc = (function () {
     var vector = new THREE.Vector2();
 

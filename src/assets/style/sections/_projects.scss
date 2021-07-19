@@ -1,5 +1,52 @@
+@use "../variables/colors" as *;
+
 #projects {
-  img {
-    max-width: 20rem;
+  padding: 2rem 10%;
+  position: relative;
+  img.deco {
+    opacity: 0.2;
+    position: absolute;
+    z-index: 0;
+    // outline: 1px solid white;
+    &#deco {
+      &1 {
+        top: 0;
+        left: 0;
+      }
+      &2 {
+        top: 0;
+        right: 0;
+      }
+      &3 {
+        bottom: 0;
+        right: 0;
+      }
+    }
   }
+  h1 {
+    font-size: 6rem;
+    color: $light-color;
+    font-weight: normal;
+  }
+  .project {
+    // border: 1px solid white;
+    border-radius: 0.5rem;
+    background-color: $light-color;
+    position:relative;
+    z-index: 1;
+    height: min-content;
+    break-inside: avoid;
+    &__container {
+      // display: flex;
+      // flex-wrap: wrap;
+      // grid-template-columns: repeat(3, 1fr);
+      gap: 1rem;
+      columns: 3 20rem;
+    }
+    &__image {
+      width: 100%;
+    }
+
+  }
+  background-image: linear-gradient(-60deg, #980f42, #36091f);
 }

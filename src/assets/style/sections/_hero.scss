@@ -1,7 +1,42 @@
 @use "../variables/colors" as *;
+@use "../components" as *;
 
 #hero {
   display: grid;
   place-items: center;
-  background-color: $bg;
+  background: linear-gradient(-45deg, #6C63FF, #2b23bd);
+  grid-template-columns: 1fr 1fr;
+  // position: relative;
+  // z-index: -2;
+  .hero {
+    color: $main-color;
+    margin-bottom: 2rem;
+    // z-index: 1;
+    &__watermark {
+      // z-index: -1;
+      position: absolute;
+      font-size: 30vw;
+      top: 5%;
+      left: 5%;
+      opacity: 0.05;
+      user-select: none;
+      pointer-events: none;
+    }
+    &__title {
+      font-size: 5rem;
+      line-height: 0.8;
+      position: relative;
+      z-index: 1;
+    }
+    &__subtitle {
+      font-size: 2rem;
+      position: relative;
+      z-index: 1;
+    }
+  }
+
+  .cta {
+    display: flex;
+    justify-content: space-evenly;
+  }
 }

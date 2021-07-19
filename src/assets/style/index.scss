@@ -14,6 +14,7 @@
 
 html {
   background: $bg;
+  scroll-behavior: smooth;
 }
 
 body {
@@ -25,3 +26,5 @@ body {
     min-height: calc(100vh - 5rem);
   }
 }
+
+

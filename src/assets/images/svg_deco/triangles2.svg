@@ -1,0 +1,44 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="507.872" height="514.935" viewBox="0 0 507.872 514.935">
+  <defs>
+    <style>
+      .cls-1 {
+        fill: none;
+        opacity: 0.19;
+      }
+
+      .cls-2, .cls-3 {
+        stroke: none;
+      }
+
+      .cls-3 {
+        fill: #a53939;
+      }
+    </style>
+  </defs>
+  <g id="Group_23" data-name="Group 23" transform="translate(-1412.128 -1088.748)">
+    <g id="Polygon_1" data-name="Polygon 1" class="cls-1" transform="translate(1639.442 1179.857) rotate(30)">
+      <path class="cls-2" d="M91,0l91,121H0Z"/>
+      <path class="cls-3" d="M 91 4.991226196289062 L 6.009933471679688 118 L 175.9900665283203 118 L 91 4.991226196289062 M 91 0 L 182 121 L 0 121 L 91 0 Z"/>
+    </g>
+    <g id="Polygon_5" data-name="Polygon 5" class="cls-1" transform="translate(1540.211 1125.782) rotate(14)">
+      <path class="cls-2" d="M91,0l91,121H0Z"/>
+      <path class="cls-3" d="M 91 4.991226196289062 L 6.009933471679688 118 L 175.9900665283203 118 L 91 4.991226196289062 M 91 0 L 182 121 L 0 121 L 91 0 Z"/>
+    </g>
+    <g id="Polygon_6" data-name="Polygon 6" class="cls-1" transform="translate(1412.128 1123.475) rotate(-11)">
+      <path class="cls-2" d="M91,0l91,121H0Z"/>
+      <path class="cls-3" d="M 91 4.991226196289062 L 6.009933471679688 118 L 175.9900665283203 118 L 91 4.991226196289062 M 91 0 L 182 121 L 0 121 L 91 0 Z"/>
+    </g>
+    <g id="Polygon_2" data-name="Polygon 2" class="cls-1" transform="matrix(0.545, 0.839, -0.839, 0.545, 1755.352, 1228.948)">
+      <path class="cls-2" d="M91,0l91,121H0Z"/>
+      <path class="cls-3" d="M 91 4.991226196289062 L 6.009933471679688 118 L 175.9900665283203 118 L 91 4.991226196289062 M 91 0 L 182 121 L 0 121 L 91 0 Z"/>
+    </g>
+    <g id="Polygon_3" data-name="Polygon 3" class="cls-1" transform="matrix(-0.777, 0.629, -0.629, -0.777, 1912.521, 1432.252)">
+      <path class="cls-2" d="M91,0l91,121H0Z"/>
+      <path class="cls-3" d="M 91 4.991226196289062 L 6.009933471679688 118 L 175.9900665283203 118 L 91 4.991226196289062 M 91 0 L 182 121 L 0 121 L 91 0 Z"/>
+    </g>
+    <g id="Path_58" data-name="Path 58" class="cls-1" transform="matrix(-0.978, 0.208, -0.208, -0.978, 1920, 1565.843)">
+      <path class="cls-2" d="M91,0l91,121H0L73.7,23.005Z"/>
+      <path class="cls-3" d="M 91 4.991226196289062 L 6.009933471679688 118 L 175.9900665283203 118 L 91 4.991226196289062 M 91 0 L 182 121 L 0 121 L 91 0 Z"/>
+    </g>
+  </g>
+</svg>

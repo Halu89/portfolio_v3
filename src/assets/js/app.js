@@ -14,7 +14,7 @@ import {
   AmbientLight,
   SpotLight,
 } from 'three';
-import { TransformControls } from 'three/examples/jsm/controls/TransformControls';
+// import { TransformControls } from 'three/examples/jsm/controls/TransformControls';
 
 import SpinControls from './SpinControls';
 
@@ -42,11 +42,9 @@ render();
 function init() {
   // window.addEventListener('resize', onWindowResize); // FIXME cube vertical oscillation speeds up on window resize.
 
-  const bgColor = window.getComputedStyle(
-    document.querySelector('#hero')
-  ).backgroundColor;
 
-  renderer = new WebGLRenderer({ canvas });
+  //Transparent canvas
+  renderer = new WebGLRenderer({ canvas, alpha: true });
   renderer.shadowMap.enabled = true;
   // Add Anti-aliasing to the shadow
   renderer.shadowMap.type = PCFSoftShadowMap;
@@ -67,7 +65,6 @@ function init() {
 
   // Scene
   scene = new Scene();
-  scene.background = new Color(bgColor);
 
   // Lights
   // Ambient light to approximate refraction
@@ -125,6 +122,9 @@ function init() {
   //Controls
   {
     control = new SpinControls(cube, 3, camera, canvas);
+    // FIXME Breaks when damping enabled
+    control.enableDamping = false;
+
     // control.setMode('rotate');
     // // Hide controls
     // control.showX = false;
@@ -132,15 +132,14 @@ function init() {
     // control.showZ = false;
 
     // Stop rotation if interacting grabbing the cube
-    control.addEventListener('mouseDown', () => {
+    control.addEventListener('start', () => {
+      console.log('interacting');
       interacting = true;
     });
-    control.addEventListener('mouseUp', () => {
+    control.addEventListener('end', () => {
+      console.log('stop interacting');
       interacting = false;
     });
-
-    // Augment the "grabbable" space around the cube
-    // control.size = 2.5;
 
     // control.attach(cube);
     // scene.add(control);

@@ -1,6 +1,9 @@
 include ../mixins/_project
-
-each proj in collections.project
-  +project(proj)
-else 
-  p No values
+img(src="/assets/images/svg_deco/triangles1.svg").deco#deco1
+img(src="/assets/images/svg_deco/triangles2.svg").deco#deco2
+img(src="/assets/images/svg_deco/triangles3.svg").deco#deco3
+.project__container 
+  each proj in collections.project
+    +project(proj)
+  else 
+    p No values

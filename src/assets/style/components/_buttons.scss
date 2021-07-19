@@ -1,0 +1,33 @@
+@use "../variables/colors" as *;
+
+.btn {
+  background-color: $main-color;
+  padding: 0.5em 1.5em;
+  border-radius: 0.375em;
+  border: 2px solid transparent;
+  cursor: pointer;
+  color: $light-color;
+  letter-spacing: .2em;
+  text-decoration: none;
+
+  // Hover effect
+  background-position: 1% 50%;
+  background-size: 300% 300%;
+  background-image: linear-gradient(
+    270deg,
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0.9),
+    rgba(255, 255, 255, 0),
+    rgba(255, 255, 255, 0)
+  );
+  transition: all 0.3s ease-out;
+  &:hover {
+    background-position: 99% 50%;
+    color: $main-color;
+  }
+  &.outline {
+    border: 2px solid $main-color;
+    background-color: transparent;
+    color: $main-color;
+  }
+}
