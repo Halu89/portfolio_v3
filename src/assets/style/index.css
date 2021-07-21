@@ -183,6 +183,9 @@ nav.minimized .navlinks a {
   position: relative;
   z-index: 1;
 }
+#hero canvas {
+  cursor: pointer;
+}
 #hero .cta {
   display: flex;
   justify-content: space-evenly;
@@ -256,9 +259,9 @@ nav.minimized .navlinks a {
   list-style: none;
   flex-wrap: wrap;
   padding: 0;
+  gap: 1em;
 }
 #projects .project__stack ul li {
-  margin: 0 1em 1em 0;
   font-size: 1rem;
   padding: 0.25em 0.5em;
   border-radius: 0.25em;
@@ -288,12 +291,12 @@ nav.minimized .navlinks a {
   grid-template-areas: "pfp header" "pfp links" ". buttons";
   place-items: center;
 }
-#contact .profilepic {
-  width: 10rem;
-  height: 10rem;
+#contact .profilepic img {
+  width: 100%;
+  height: 100%;
   background-color: gray;
   border-radius: 50%;
-  border: 2px solid white;
+  border: 3px solid white;
   display: grid;
   place-items: center;
   grid-area: pfp;
@@ -360,7 +363,7 @@ nav.minimized .navlinks a {
 #contact .links::after {
   content: "";
   position: absolute;
-  width: 1px;
+  width: 2px;
   height: 60%;
   background-color: white;
 }
@@ -379,6 +382,8 @@ footer {
 html {
   background: #e7e7e7;
   scroll-behavior: smooth;
+  -ms-scroll-snap-type: y proximity;
+      scroll-snap-type: y proximity;
 }
 
 body {
@@ -386,4 +391,5 @@ body {
 }
 body section {
   min-height: 100vh;
+  scroll-snap-align: start;
 }/*# sourceMappingURL=index.css.map */

@@ -14,13 +14,13 @@
       '. buttons';
     place-items: center;
   }
-  .profilepic {
-    $size: 10rem;
+  .profilepic img {
+    $size: 100%;
     width: $size;
     height: $size;
     background-color: gray;
     border-radius: 50%;
-    border: 2px solid white;
+    border: 3px solid white;
     display: grid;
     place-items: center;
     grid-area: pfp;
@@ -104,7 +104,7 @@
     &::after {
       content: '';
       position: absolute;
-      width: 1px;
+      width: 2px;
       height: 60%;
       background-color: white;
     }
@@ -114,6 +114,6 @@
     font-weight: normal;
     font-style: italic;
     margin: 0.5rem 3rem;
-    text-align:center;
+    text-align: center;
   }
 }

@@ -16,6 +16,7 @@ $nav-height: 5rem;
 html {
   background: $bg;
   scroll-behavior: smooth;
+  scroll-snap-type: y proximity;
   // scroll-padding-top: $nav-height;
 }
 
@@ -24,8 +25,10 @@ body {
   // nav {
   //   height: $nav-height;
   // }
+
   section {
-    min-height:100vh;
+    min-height: 100vh;
+    scroll-snap-align: start;
     // min-height: calc(100vh - #{$nav-height});
   }
 }
