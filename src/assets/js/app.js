@@ -17,7 +17,7 @@ import {
 // import { TransformControls } from 'three/examples/jsm/controls/TransformControls';
 
 import SpinControls from './SpinControls';
-
+import styledNav from "./styledNav"
 class ColorGUIHelper {
   constructor(object, prop) {
     (this.object = object), (this.prop = prop);

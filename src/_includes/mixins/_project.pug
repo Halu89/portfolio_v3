@@ -1,16 +1,20 @@
 mixin project(proj)
   - const image = proj.data.image || "/assets/images/projects/default.png";
   .project
-    h2=proj.data.title
     img(src=image, alt="Website screenshot").project__image
-    if proj.data.githubLink
-      a(href=proj.data.githubLink target="_blank") View on Github
-    if proj.data.liveLink 
-      a(href=proj.data.liveLink target="_blank") View live
-
-    p=proj.data.description
-    if proj.data.techStack 
-      p Tech Stack
-      each tech in proj.data.techStack 
-        ul 
-          li=tech
+    .project__text
+      h2.project__title=proj.data.title
+      p.project__description=proj.data.description
+      .project__stack
+        if proj.data.techStack 
+          p Tech Stack: 
+          ul.project__pills 
+            each tech in proj.data.techStack 
+              li=tech
+      .project__links
+        if proj.data.githubLink
+          a(href=proj.data.githubLink target="_blank").btn  
+            i.fab.fa-github
+            span Code
+        if proj.data.liveLink 
+          a(href=proj.data.liveLink target="_blank").btn View live

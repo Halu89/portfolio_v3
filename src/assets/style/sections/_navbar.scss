@@ -1,27 +1,48 @@
 @use "../variables/colors" as *;
 
 nav {
-  background: linear-gradient(to right, $bg, $main-color);
+  background: transparent;
   display: flex;
   align-items: center;
-  position: sticky;
+  justify-content: space-between;
+  position: fixed;
+  width: 100%;
+  z-index: 100;
   top: 0;
+  transition: all .3s;
   img.logo {
     width: 8rem;
-    padding: 1rem;
     margin-left: 2rem;
   }
   .navlinks {
     display: flex;
     list-style: none;
     margin-left: auto;
-    li {
-      padding: 0.5rem 2rem;
-
-      a.navlink {
+    li {      
+      a {
+        padding: 0.5rem 2rem;
         text-decoration: none;
         font-size: 2rem;
         color: $light-color;
+        &:hover {
+          opacity: .8;
+        }
+      }
+    }
+  }
+  &.minimized {
+    background: $main-color;
+    img.logo {
+      display: none;
+    }
+    .navlinks {
+      margin: 0;
+      margin-left: auto;
+      li {
+        padding: 0 1rem;
+      }
+      a {
+        font-size: 1.5rem;
       }
     }
   }

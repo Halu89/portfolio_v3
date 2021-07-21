@@ -12,19 +12,20 @@
 @use "./sections/contact";
 @use "./sections/footer";
 
+$nav-height: 5rem;
 html {
   background: $bg;
   scroll-behavior: smooth;
+  // scroll-padding-top: $nav-height;
 }
 
 body {
   display: grid;
-  nav {
-    height: 5rem;
-  }
+  // nav {
+  //   height: $nav-height;
+  // }
   section {
-    min-height: calc(100vh - 5rem);
+    min-height:100vh;
+    // min-height: calc(100vh - #{$nav-height});
   }
 }
-
-

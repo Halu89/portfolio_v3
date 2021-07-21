@@ -1,10 +1,22 @@
-h1 Let's work together 
-ul  
-  li  
-    a Github
-  li  
-    a Mail
-  li  
-    a Phone
-  li  
-    a Resume
+.container 
+  .profilepic Pfp
+  h1 Let's work together !
+  .links
+    ul.socials  
+      li  
+        a(href="https://github.com/Halu89" target="_blank")
+          i.fab.fa-github
+      li  
+        a(href="https://www.linkedin.com/in/corentin-briand-a988931b2/" target="_blank")
+          i.fab.fa-linkedin-in
+    ul.coords
+      li  
+        p corentin.briand@gmail.com
+      li  
+        p +33 6 17 64 84 07
+
+  .cta 
+    button.btn.outline#cta__contact Contact 
+      i.fas.fa-paper-plane
+    a(href="/assets/misc/CV_Corentin_Briand.pdf" download="CV_Corentin_Briand").btn.outline#cta__resume Resume 
+      i.fas.fa-file-download

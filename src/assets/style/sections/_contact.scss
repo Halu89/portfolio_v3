@@ -1,5 +1,119 @@
+@use "../variables/colors" as*;
+
 #contact {
   padding-top: 1rem;
   display: grid;
   place-items: center;
+  background-image: linear-gradient(#b9c7df, #7891bd);
+  color: $main-light;
+  .container {
+    display: grid;
+    grid-template-areas:
+      'pfp header'
+      'pfp links'
+      '. buttons';
+    place-items: center;
+  }
+  .profilepic {
+    $size: 10rem;
+    width: $size;
+    height: $size;
+    background-color: gray;
+    border-radius: 50%;
+    border: 2px solid white;
+    display: grid;
+    place-items: center;
+    grid-area: pfp;
+  }
+  .cta {
+    grid-area: buttons;
+    display: flex;
+    margin-top: 2rem;
+    // justify-self:stretch;
+    // justify-content: space-around;
+    & > * {
+      margin: 0 5rem;
+    }
+    .btn {
+      letter-spacing: 0.1em;
+    }
+    $clr-contact: #37a1b7;
+    $clr-resume: #800b1f;
+    #cta__contact {
+      box-shadow: 0 0 20px $clr-contact;
+      background-image: linear-gradient(
+        270deg,
+        $clr-contact,
+        $clr-contact,
+        $light-color,
+        $light-color
+      );
+      border: 1px solid white;
+      color: $clr-contact;
+      &:hover {
+        color: $light-color;
+      }
+    }
+    #cta__resume {
+      box-shadow: 0 0 20px $clr-resume;
+      border: 1px solid white;
+      background-image: linear-gradient(
+        270deg,
+        $clr-resume,
+        $clr-resume,
+        $light-color,
+        $light-color
+      );
+      border: 1px solid white;
+      color: $clr-resume;
+      &:hover {
+        color: $light-color;
+      }
+    }
+  }
+  .links {
+    grid-area: links;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    justify-self: stretch;
+    place-items: center;
+    position: relative;
+    // align-items: center;
+    ul {
+      list-style: none;
+      padding-left: 0;
+      // border-right: 1px solid white;
+      &.socials {
+        display: flex;
+        margin: 0;
+        font-size: 2rem;
+        li {
+          margin: 0 0.5em;
+        }
+        a {
+          padding: 0.5em 1em;
+          text-decoration: none;
+          color: $main-light;
+          transition: color 0.15s linear;
+          &:hover {
+            color: $light-color;
+          }
+        }
+      }
+    }
+    &::after {
+      content: '';
+      position: absolute;
+      width: 1px;
+      height: 60%;
+      background-color: white;
+    }
+  }
+  h1 {
+    font-size: 5rem;
+    font-weight: normal;
+    font-style: italic;
+    margin: 0.5rem 3rem;
+    text-align:center;
+  }
 }
