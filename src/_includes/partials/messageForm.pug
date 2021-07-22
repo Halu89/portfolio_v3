@@ -1,0 +1,13 @@
+#modal
+  section.modal__child 
+    form
+      label(for="email") Email :
+        input#email(type="email", name="email" required)
+      label(for="subject") Subject :
+        input#subject(type="text", name="subject" required)
+      label(for="message") Message :
+        textarea#message(name="message", cols="30", rows="10" required)
+      
+    .modal__buttons
+      button.btn Send
+      button.btn.outline Close

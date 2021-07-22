@@ -379,6 +379,45 @@ footer {
   height: 1rem;
 }
 
+#modal {
+  position: fixed;
+  z-index: 100;
+  display: grid;
+  place-items: center;
+  inset: 0;
+  background-color: rgba(211, 211, 211, 0.281);
+}
+#modal section {
+  width: 90vh;
+  min-height: -webkit-fit-content;
+  min-height: -moz-fit-content;
+  min-height: fit-content;
+  background-color: #c97878;
+  padding: 2rem 3rem;
+}
+#modal form {
+  display: flex;
+  flex-direction: column;
+}
+#modal form label {
+  display: flex;
+  flex-direction: column;
+}
+#modal form input, #modal form textarea {
+  margin: 0.5rem 0;
+}
+#modal form input {
+  width: 80%;
+}
+#modal .modal__buttons {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 1rem;
+}
+#modal.hide {
+  display: none;
+}
+
 html {
   background: #e7e7e7;
   scroll-behavior: smooth;
