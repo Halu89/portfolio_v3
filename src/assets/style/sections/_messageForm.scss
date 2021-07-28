@@ -21,6 +21,9 @@
     input, textarea {
       margin: .5rem 0;
     }
+    textarea {
+      resize:none;
+    }
     input {
       width: 80%;
     }

@@ -406,6 +406,9 @@ footer {
 #modal form input, #modal form textarea {
   margin: 0.5rem 0;
 }
+#modal form textarea {
+  resize: none;
+}
 #modal form input {
   width: 80%;
 }

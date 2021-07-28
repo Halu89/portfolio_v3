@@ -7,7 +7,7 @@
         input#subject(type="text", name="subject" required)
       label(for="message") Message :
         textarea#message(name="message", cols="30", rows="10" required)
-      
+      p#form__error
     .modal__buttons
-      button.btn Send
-      button.btn.outline Close
+      button.btn#sendMail Send
+      button.btn.outline#closeForm Close
