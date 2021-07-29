@@ -12,6 +12,7 @@
 @use "./sections/contact";
 @use "./sections/footer";
 @use "./sections/messageForm";
+@use "./sections/flashMessage";
 
 $nav-height: 5rem;
 html {

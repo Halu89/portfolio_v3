@@ -1,60 +1,94 @@
 import sendMail from "./sendMail";
 
+const flashType = { SUCCESS: "success", DANGER: "danger" };
+
+const flashDisp = document.querySelector("#flashMessage p");
+const flashClose = document.querySelector("#flashMessage button");
+const flash = document.querySelector("#flashMessage");
+
 const sendBtn = document.querySelector("#sendMail");
 const closeBtn = document.querySelector("#closeForm");
 const openBtn = document.querySelector("#cta__contact");
 
 const modal = document.querySelector("#modal");
 
-function closeForm() {
-  modal.classList.add("hide");
-}
-function openForm() {
-  modal.classList.remove("hide");
-}
+closeBtn.onclick = () => modal.classList.add("hide");
+openBtn.onclick = () => modal.classList.remove("hide");
 
-closeBtn.onclick = closeForm;
-openBtn.onclick = openForm;
+let pending = false;
 
 sendBtn.onclick = () => {
-  const data = validate(getData());
+  const data = validate(getFormData());
+  console.log("data :>> ", data);
+  // Don't send if data invalid.
   if (data.error) {
-    console.log(data.message);
-    showError(data.message);
+    return showFormError(data.message);
   }
-  if (!data.error) sendMail(data.validated);
-  // closeBtn.click();
+  // Don't double send
+  if (pending) return;
+
+  // Close the message form
+  closeBtn.click();
+  pending = true;
+  sendMail(data.validated)
+    .then(response => {
+      pending = false;
+      if (response.ok) {
+        // Message sent successfully
+        displayFlash(
+          flashType.SUCCESS,
+          "Message sent successfully. Thank you for your message."
+        );
+
+        resetForm();
+      } else {
+        // Error with the mail api
+        // Display error message
+        displayFlash(
+          flashType.DANGER,
+          "Error while sending your message. Please send your message directly at corentin.briand@gmail.com"
+        );
+      }
+    })
+    .catch(() => {
+      // Possible network error
+      displayFlash(
+        flashType.DANGER,
+        "Error while sending your message. Please send your message directly at corentin.briand@gmail.com"
+      );
+    });
 };
 
-function getData() {
+function getFormData() {
   const email = document.querySelector("#modal #email").value;
   const subject = document.querySelector("#modal #subject").value;
   const message = document.querySelector("#modal #message").value;
   return {
-    email,
+    sender: email,
     subject,
     message,
   };
 }
-
-function showError(message) {
-  const form = document.querySelector("#modal form");
-  let errorDisplay = document.querySelector("#form__error");
-  errorDisplay.textContent = `Error : ${message}`;
+function resetForm() {
+  document.querySelector("#modal #email").value = "";
+  document.querySelector("#modal #subject").value = "";
+  document.querySelector("#modal #message").value = "";
 }
 
 function validate(data) {
-  const { email, subject, message } = data;
-  if (!(email.trim() && subject.trim() && message.trim())) {
+  const { sender, subject, message } = data;
+
+  if (!(sender.trim() && subject.trim() && message.trim())) {
     return {
       error: true,
       message: "Please fill out all fields",
     };
   }
+
   // https://ihateregex.io/expr/email/
   // (group)@(group).(group) with no @, empty space, or tab, or new line in every group
-  const regExp = new RegExp("[^@ \t\r\n]+@[^@ \t\r\n]+.[^@ \t\r\n]+");
-  if (!regExp.test(email)) {
+  const mailRE = new RegExp("[^@ \t\r\n]+@[^@ \t\r\n]+.[^@ \t\r\n]+");
+  if (!mailRE.test(sender)) {
     return {
       error: true,
       message: "Invalid Email Adress",
@@ -66,3 +100,17 @@ function validate(data) {
     validated: data,
   };
 }
+
+function showFormError(message) {
+  let errorDisplay = document.querySelector("#form__error");
+  errorDisplay.textContent = `Error : ${message}`;
+}
+
+function displayFlash(type, message) {
+  flashDisp.textContent = message;
+
+  flash.classList.remove("hide");
+  flash.classList.add(type);
+}
+
+flashClose.onclick = () => flash.classList.add("hide");

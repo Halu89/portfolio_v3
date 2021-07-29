@@ -429,6 +429,44 @@ footer {
   display: none;
 }
 
+#flashMessage {
+  position: fixed;
+  z-index: 100;
+  top: 5rem;
+  left: 10%;
+  width: 80%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  opacity: 1;
+  transition: opacity 0.2s linear;
+  border-radius: 0.5em;
+}
+#flashMessage p {
+  padding: 1rem 3rem;
+}
+#flashMessage button {
+  padding: 0.5rem 0.8rem;
+  font-size: 2rem;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  opacity: 0.5;
+}
+#flashMessage button:hover {
+  opacity: 1;
+}
+#flashMessage.success {
+  background-color: #4ea874;
+}
+#flashMessage.danger {
+  background-color: #a8544e;
+}
+#flashMessage.hide {
+  opacity: 0;
+  pointer-events: none;
+}
+
 html {
   background: #e7e7e7;
   scroll-behavior: smooth;
