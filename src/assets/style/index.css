@@ -106,6 +106,7 @@ nav .navlinks li a {
   text-decoration: none;
   font-size: 2rem;
   color: white;
+  transition: font-size 0.15s;
 }
 nav .navlinks li a:hover {
   opacity: 0.8;
@@ -394,6 +395,8 @@ footer {
   place-items: center;
   inset: 0;
   background-color: rgba(211, 211, 211, 0.281);
+  opacity: 1;
+  transition: opacity 0.3s;
 }
 #modal section {
   width: 90vh;
@@ -411,7 +414,8 @@ footer {
   display: flex;
   flex-direction: column;
 }
-#modal form input, #modal form textarea {
+#modal form input,
+#modal form textarea {
   margin: 0.5rem 0;
 }
 #modal form textarea {
@@ -426,7 +430,8 @@ footer {
   margin-top: 1rem;
 }
 #modal.hide {
-  display: none;
+  opacity: 0;
+  pointer-events: none;
 }
 
 #flashMessage {

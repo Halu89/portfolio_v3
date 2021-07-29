@@ -5,6 +5,8 @@
   place-items: center;
   inset: 0;
   background-color: rgba(211, 211, 211, 0.281);
+  opacity: 1;
+  transition: opacity .3s;
   section {
     width: 90vh;
     min-height: fit-content;
@@ -18,11 +20,12 @@
       display: flex;
       flex-direction: column;
     }
-    input, textarea {
-      margin: .5rem 0;
+    input,
+    textarea {
+      margin: 0.5rem 0;
     }
     textarea {
-      resize:none;
+      resize: none;
     }
     input {
       width: 80%;
@@ -32,9 +35,9 @@
     display: flex;
     justify-content: space-evenly;
     margin-top: 1rem;
-    
   }
   &.hide {
-    display: none;
+    opacity: 0;
+    pointer-events: none;
   }
 }

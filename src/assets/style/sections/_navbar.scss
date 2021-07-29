@@ -24,6 +24,7 @@ nav {
         text-decoration: none;
         font-size: 2rem;
         color: $light-color;
+        transition: font-size .15s;
         &:hover {
           opacity: .8;
         }
