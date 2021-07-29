@@ -13,7 +13,23 @@ const openBtn = document.querySelector("#cta__contact");
 const modal = document.querySelector("#modal");
 
 closeBtn.onclick = () => modal.classList.add("hide");
-openBtn.onclick = () => modal.classList.remove("hide");
+
+openBtn.onclick = () => {
+  modal.classList.remove("hide");
+
+  // Remove any possible previous errors
+  showFormError("");
+
+  // Put the cursor in the email input field
+  document.querySelector("#modal #email").focus();
+};
+
+document.addEventListener("keyup", e => {
+  // Close the modal on escape
+  if (e.code === "Escape") {
+    closeBtn.click();
+  }
+});
 
 let pending = false;
 
@@ -81,7 +97,7 @@ function validate(data) {
   if (!(sender.trim() && subject.trim() && message.trim())) {
     return {
       error: true,
-      message: "Please fill out all fields",
+      message: "Error : Please fill out all fields",
     };
   }
 
@@ -91,7 +107,7 @@ function validate(data) {
   if (!mailRE.test(sender)) {
     return {
       error: true,
-      message: "Invalid Email Adress",
+      message: "Error : Invalid Email Adress",
     };
   }
 
@@ -103,7 +119,7 @@ function validate(data) {
 
 function showFormError(message) {
   let errorDisplay = document.querySelector("#form__error");
-  errorDisplay.textContent = `Error : ${message}`;
+  errorDisplay.textContent = message;
 }
 
 function displayFlash(type, message) {
