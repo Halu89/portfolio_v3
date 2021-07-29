@@ -9,21 +9,24 @@
   .container {
     display: grid;
     grid-template-areas:
-      'pfp header'
-      'pfp links'
-      '. buttons';
+      "pfp header"
+      "pfp links"
+      ". buttons";
     place-items: center;
   }
-  .profilepic img {
-    $size: 100%;
-    width: $size;
-    height: $size;
-    background-color: gray;
-    border-radius: 50%;
-    border: 3px solid white;
-    display: grid;
-    place-items: center;
+  .profilepic {
     grid-area: pfp;
+    
+    img {
+      $size: 100%;
+      width: $size;
+      // height: $size;
+      background-color: gray;
+      border-radius: 50%;
+      border: 3px solid white;
+      display: grid;
+      place-items: center;
+    }
   }
   .cta {
     grid-area: buttons;
@@ -102,18 +105,24 @@
       }
     }
     &::after {
-      content: '';
+      content: "";
       position: absolute;
       width: 2px;
       height: 60%;
       background-color: white;
     }
   }
-  h1 {
-    font-size: 5rem;
-    font-weight: normal;
-    font-style: italic;
-    margin: 0.5rem 3rem;
-    text-align: center;
+  .header {
+    display: flex;
+    flex-direction: column;
+    justify-content: end;
+    h1 {
+      font-size: 6rem;
+      font-family: "Parisienne";
+      font-weight: normal;
+      font-style: italic;
+      margin: 0.5rem 3rem;
+      text-align: center;
+    }
   }
 }
