@@ -155,7 +155,7 @@ nav.minimized .navlinks a {
 #hero {
   display: grid;
   place-items: center;
-  background: linear-gradient(-45deg, #6789CB, #436fc7);
+  background: linear-gradient(-45deg, #6789cb, #436fc7);
   grid-template-columns: 1fr 1fr;
 }
 #hero .hero {
@@ -191,6 +191,30 @@ nav.minimized .navlinks a {
 #hero .cta {
   display: flex;
   justify-content: space-evenly;
+}
+@media screen and (max-width: 1000px) {
+  #hero {
+    grid-template-columns: none;
+  }
+}
+@media screen and (max-width: 560px) {
+  #hero canvas {
+    display: none;
+  }
+  #hero .container {
+    display: flex;
+    flex-direction: column;
+    padding-inline: 2em;
+  }
+  #hero .container .hero__title {
+    font-size: 4rem;
+  }
+  #hero .container .hero__subtitle {
+    font-size: 1.5rem;
+  }
+  #hero .cta {
+    font-size: 0.8rem;
+  }
 }
 
 #projects {

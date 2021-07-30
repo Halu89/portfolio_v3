@@ -4,7 +4,7 @@
 #hero {
   display: grid;
   place-items: center;
-  background: linear-gradient(-45deg, #6789CB, #436fc7);
+  background: linear-gradient(-45deg, #6789cb, #436fc7);
   grid-template-columns: 1fr 1fr;
   // position: relative;
   // z-index: -2;
@@ -40,5 +40,29 @@
   .cta {
     display: flex;
     justify-content: space-evenly;
+  }
+  @media screen and (max-width: 1000px) {
+    grid-template-columns: none;
+  }
+  @media screen and (max-width:560px) {
+    canvas {
+      display:none;
+    }
+    .container {
+      display:flex;
+      flex-direction: column;
+      padding-inline: 2em;
+      .hero {
+        &__title {
+          font-size: 4rem;
+        }
+        &__subtitle {
+          font-size:1.5rem;
+        }
+      }
+    }
+    .cta {
+      font-size: .8rem;
+    }
   }
 }
