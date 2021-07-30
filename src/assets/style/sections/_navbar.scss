@@ -9,24 +9,24 @@ nav {
   width: 100%;
   z-index: 100;
   top: 0;
-  transition: all .3s;
+  transition: all 0.3s;
   img.logo {
     width: 8rem;
-    margin-left: 2rem;
+    margin: 2rem;
   }
   .navlinks {
     display: flex;
     list-style: none;
     margin-left: auto;
-    li {      
+    li {
       a {
         padding: 0.5rem 2rem;
         text-decoration: none;
         font-size: 2rem;
         color: $light-color;
-        transition: font-size .15s;
+        transition: font-size 0.15s;
         &:hover {
-          opacity: .8;
+          opacity: 0.8;
         }
       }
     }
@@ -44,6 +44,40 @@ nav {
       }
       a {
         font-size: 1.5rem;
+      }
+    }
+  }
+  #navToggle {
+    display: none;
+  }
+  @media screen and (max-width: 1000px) {
+    #navToggle {
+      display: block;
+      position: fixed;
+      z-index: 100;
+      top: 2em;
+      right: 2em;
+      color: $light-color;
+      background-color: $main-color;
+      padding: 0.5em 1em;
+      border: 2px solid $light-color;
+      border-radius: .5em;
+      cursor: pointer;
+    }
+    .navlinks {
+      flex-direction: column;
+      position: fixed;
+      top: 0;
+      left: 0;
+      background-color: $main-color;
+      transform: translateY(-120%);
+      transition: transform 0.2s;
+      width: 100%;
+      margin: 0;
+      padding: 1em;
+
+      &.show {
+        transform: translateY(0);
       }
     }
   }

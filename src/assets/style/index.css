@@ -94,7 +94,7 @@ nav {
 }
 nav img.logo {
   width: 8rem;
-  margin-left: 2rem;
+  margin: 2rem;
 }
 nav .navlinks {
   display: flex;
@@ -126,6 +126,39 @@ nav.minimized .navlinks li {
 }
 nav.minimized .navlinks a {
   font-size: 1.5rem;
+}
+nav #navToggle {
+  display: none;
+}
+@media screen and (max-width: 1000px) {
+  nav #navToggle {
+    display: block;
+    position: fixed;
+    z-index: 100;
+    top: 2em;
+    right: 2em;
+    color: white;
+    background-color: #400A13;
+    padding: 0.5em 1em;
+    border: 2px solid white;
+    border-radius: 0.5em;
+    cursor: pointer;
+  }
+  nav .navlinks {
+    flex-direction: column;
+    position: fixed;
+    top: 0;
+    left: 0;
+    background-color: #400A13;
+    transform: translateY(-120%);
+    transition: transform 0.2s;
+    width: 100%;
+    margin: 0;
+    padding: 1em;
+  }
+  nav .navlinks.show {
+    transform: translateY(0);
+  }
 }
 
 .btn {
@@ -303,6 +336,11 @@ nav.minimized .navlinks a {
 }
 #projects .project__links .btn i {
   margin-right: 1em;
+}
+@media screen and (max-width: 800px) {
+  #projects h1 {
+    font-size: 3rem;
+  }
 }
 
 #contact {
