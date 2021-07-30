@@ -341,6 +341,9 @@ nav #navToggle {
   #projects h1 {
     font-size: 3rem;
   }
+  #projects .project__links .btn {
+    font-size: 0.6rem;
+  }
 }
 
 #contact {
