@@ -1,13 +1,14 @@
 @use "../variables/colors" as*;
 
 #contact {
-  padding: 1rem 0 ;
+  padding: 1rem 0;
+  padding-bottom: 3rem;
   display: grid;
   place-items: center;
   background-image: linear-gradient(#b9c7df, #7891bd);
   color: $main-light;
   .container {
-    margin:2rem;
+    margin: 2rem;
     display: grid;
     grid-template-columns: 10rem 1fr;
     grid-template-areas:
@@ -18,7 +19,7 @@
   }
   .profilepic {
     grid-area: pfp;
-    
+
     img {
       $size: 10rem;
       width: $size;
@@ -81,7 +82,7 @@
     grid-area: links;
     display: grid;
     grid-template-columns: repeat(2, 1fr);
-    gap:1rem;
+    gap: 1rem;
     justify-self: stretch;
     place-items: center;
     position: relative;
@@ -96,7 +97,6 @@
         font-size: 2rem;
         li {
           margin: 0 0.5em;
-          
         }
         a {
           padding: 0.5em 1em;
@@ -130,18 +130,17 @@
       text-align: center;
     }
   }
-  @media screen and (max-width:600px) {
+  @media screen and (max-width: 600px) {
     .container {
       display: grid;
-      margin:0;
+      margin: 0;
       grid-template-columns: 1fr;
-      width:90vw;
-      grid-template-areas: 
-      "pfp"
-      "header"
-      "links"
-      "buttons"
-      ;
+      width: 90vw;
+      grid-template-areas:
+        "pfp"
+        "header"
+        "links"
+        "buttons";
       .header h1 {
         font-size: 3rem;
       }
@@ -156,16 +155,15 @@
           // transform: rotate(90deg) scaleY(2);
           // bottom:30%;
           // ;
-          bottom:55%;
-          width:40%;
-          height:2px;
+          bottom: 55%;
+          width: 40%;
+          height: 2px;
         }
       }
       .cta > * {
-        margin:0 .5rem;
-        font-size: .9rem;
+        margin: 0 0.5rem;
+        font-size: 0.9rem;
       }
     }
   }
 }
- 
