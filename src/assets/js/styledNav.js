@@ -18,3 +18,14 @@ navToggle.onclick = () => {
     navToggle.textContent = "Menu";
   }
 };
+
+document.addEventListener("click", e => {
+  // Close navbar if click on a nav link
+  if (e.target.classList.contains("navlink")) {
+    navToggle.click();
+  }
+});
+document.querySelector("main").addEventListener("click", e => {
+  // Close Navbar if click outside nav.
+  if (navlinks.classList.contains("show")) navToggle.click();
+});

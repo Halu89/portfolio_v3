@@ -348,7 +348,7 @@ nav #navToggle {
 }
 
 #contact {
-  padding-top: 1rem;
+  padding: 1rem 0;
   display: grid;
   place-items: center;
   background-image: linear-gradient(#b9c7df, #7891bd);
