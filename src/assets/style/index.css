@@ -155,6 +155,7 @@ nav #navToggle {
     width: 100%;
     margin: 0;
     padding: 1em;
+    padding-top: 5rem;
   }
   nav .navlinks.show {
     transform: translateY(0);
@@ -382,6 +383,9 @@ nav #navToggle {
 }
 #contact .cta .btn {
   letter-spacing: 0.1em;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
 }
 #contact .cta #cta__contact {
   box-shadow: 0 0 20px #37a1b7;
@@ -478,7 +482,7 @@ nav #navToggle {
   }
   #contact .container .cta > * {
     margin: 0 0.5rem;
-    font-size: 0.8rem;
+    font-size: 0.9rem;
   }
 }
 
@@ -497,7 +501,7 @@ footer {
   transition: opacity 0.3s;
 }
 #modal section {
-  width: 90vh;
+  width: clamp(250px, 90vw, 50rem);
   min-height: -webkit-fit-content;
   min-height: -moz-fit-content;
   min-height: fit-content;
@@ -521,7 +525,7 @@ footer {
   resize: none;
 }
 #modal form input {
-  width: 80%;
+  width: clamp(10rem, 80%, 30rem);
 }
 #modal .modal__buttons {
   display: flex;
@@ -531,6 +535,18 @@ footer {
 #modal.hide {
   opacity: 0;
   pointer-events: none;
+}
+@media screen and (max-width: 800px) {
+  #modal section {
+    padding: 1.5rem 5%;
+  }
+  #modal input,
+#modal textarea {
+    font-size: 0.9rem;
+  }
+  #modal .modal__buttons {
+    font-size: 0.9rem;
+  }
 }
 
 #flashMessage {

@@ -41,6 +41,7 @@
     }
     .btn {
       letter-spacing: 0.1em;
+      width: max-content;
     }
     $clr-contact: #37a1b7;
     $clr-resume: #800b1f;
@@ -95,6 +96,7 @@
         font-size: 2rem;
         li {
           margin: 0 0.5em;
+          
         }
         a {
           padding: 0.5em 1em;
@@ -161,7 +163,7 @@
       }
       .cta > * {
         margin:0 .5rem;
-        font-size: .8rem;
+        font-size: .9rem;
       }
     }
   }
