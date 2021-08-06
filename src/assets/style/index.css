@@ -468,6 +468,9 @@ nav #navToggle {
     flex-direction: column;
     justify-items: space-between;
   }
+  #contact .container .links ul.socials li {
+    margin: 0;
+  }
   #contact .container .links::after {
     bottom: 55%;
     width: 40%;
@@ -475,6 +478,7 @@ nav #navToggle {
   }
   #contact .container .cta > * {
     margin: 0 0.5rem;
+    font-size: 0.8rem;
   }
 }
 

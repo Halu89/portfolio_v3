@@ -147,6 +147,9 @@
         display: flex;
         flex-direction: column;
         justify-items: space-between;
+        ul.socials li {
+          margin: 0;
+        }
         &::after {
           // transform: rotate(90deg) scaleY(2);
           // bottom:30%;
@@ -158,6 +161,7 @@
       }
       .cta > * {
         margin:0 .5rem;
+        font-size: .8rem;
       }
     }
   }
