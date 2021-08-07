@@ -252,7 +252,7 @@ nav #navToggle {
 }
 
 #projects {
-  padding: 2rem 10%;
+  padding: 2rem;
   position: relative;
   background-image: linear-gradient(-60deg, #980f42, #36091f);
 }
@@ -295,6 +295,8 @@ nav #navToggle {
   gap: 1rem;
   -moz-columns: 3 20rem;
        columns: 3 20rem;
+  margin: 0 auto;
+  max-width: 70rem;
 }
 #projects .project__image {
   width: 100%;
@@ -537,7 +539,7 @@ footer {
   opacity: 0;
   pointer-events: none;
 }
-@media screen and (max-width: 800px) {
+@media screen and (max-width: 900px) {
   #modal section {
     padding: 1.5rem 5%;
   }

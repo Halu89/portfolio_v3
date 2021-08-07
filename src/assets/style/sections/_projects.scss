@@ -1,7 +1,7 @@
 @use "../variables/colors" as *;
 
 #projects {
-  padding: 2rem 10%;
+  padding: 2rem;
   position: relative;
   img.deco {
     opacity: 0.5;
@@ -41,16 +41,18 @@
     &__container {
       gap: 1rem;
       columns: 3 20rem;
+      margin: 0 auto;
+      max-width: 70rem;
     }
     &__image {
       width: 100%;
-      border-radius: 0.5rem .5rem 0 0;
+      border-radius: 0.5rem 0.5rem 0 0;
     }
     &__text {
       padding: 0.5rem 10%;
     }
     &__title {
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
       font-size: 1.5rem;
       font-weight: normal;
       color: $main-lighter;
@@ -63,7 +65,6 @@
         width: 100%;
         list-style: none;
         flex-wrap: wrap;
-        // justify-content: space-evenly;
         padding: 0;
         gap: 1em;
 
@@ -89,12 +90,13 @@
     }
   }
   background-image: linear-gradient(-60deg, #980f42, #36091f);
-  @media screen and (max-width:800px) {
+  @media screen and (max-width: 800px) {
+    // padding:1rem 5%;
     h1 {
       font-size: 3rem;
     }
     .project__links .btn {
-      font-size: .6rem;
+      font-size: 0.6rem;
     }
   }
 }
