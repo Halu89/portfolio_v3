@@ -12,9 +12,11 @@ mixin project(proj)
             each tech in proj.data.techStack 
               li=tech
       .project__links
+        if proj.data.tags.includes("codepen")
+          a(href=proj.data.liveLink target="_blank").btn View Codepen
         if proj.data.githubLink
           a(href=proj.data.githubLink target="_blank").btn  
             i.fab.fa-github
             span Code
-        if proj.data.liveLink 
+        if proj.data.liveLink && !proj.data.tags.includes("codepen")
           a(href=proj.data.liveLink target="_blank").btn View live
