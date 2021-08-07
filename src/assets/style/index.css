@@ -359,6 +359,7 @@ nav #navToggle {
 }
 #contact .container {
   margin: 2rem;
+  padding: 0 2rem;
   display: grid;
   grid-template-columns: 10rem 1fr;
   grid-template-areas: "pfp header" "pfp links" ". buttons";
@@ -366,10 +367,14 @@ nav #navToggle {
 }
 #contact .profilepic {
   grid-area: pfp;
+  width: -webkit-max-content;
+  width: -moz-max-content;
+  width: max-content;
 }
 #contact .profilepic img {
-  width: 10rem;
-  height: 10rem;
+  width: 15rem;
+  -o-object-fit: cover;
+     object-fit: cover;
   background-color: gray;
   border-radius: 50%;
   border: 3px solid white;
@@ -463,12 +468,16 @@ nav #navToggle {
   #contact .container {
     display: grid;
     margin: 0;
+    padding: 0;
     grid-template-columns: 1fr;
     width: 90vw;
     grid-template-areas: "pfp" "header" "links" "buttons";
   }
   #contact .container .header h1 {
     font-size: 3rem;
+  }
+  #contact .container .profilepic img {
+    width: 10rem;
   }
   #contact .container .links {
     display: flex;

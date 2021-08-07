@@ -9,6 +9,7 @@
   color: $main-light;
   .container {
     margin: 2rem;
+    padding: 0 2rem;
     display: grid;
     grid-template-columns: 10rem 1fr;
     grid-template-areas:
@@ -19,11 +20,12 @@
   }
   .profilepic {
     grid-area: pfp;
-
+    width:max-content;
     img {
-      $size: 10rem;
+      $size: 15rem;
       width: $size;
-      height: $size;
+      // height: $size;
+      object-fit: cover;
       background-color: gray;
       border-radius: 50%;
       border: 3px solid white;
@@ -134,6 +136,7 @@
     .container {
       display: grid;
       margin: 0;
+      padding:0;
       grid-template-columns: 1fr;
       width: 90vw;
       grid-template-areas:
@@ -143,6 +146,9 @@
         "buttons";
       .header h1 {
         font-size: 3rem;
+      }
+      .profilepic img {
+        width: 10rem;
       }
       .links {
         display: flex;
