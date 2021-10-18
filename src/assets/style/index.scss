@@ -18,7 +18,7 @@ $nav-height: 5rem;
 html {
   background: $bg;
   scroll-behavior: smooth;
-  // scroll-snap-type: y proximity;
+  scroll-snap-type: y proximity;
   // overscroll-behavior-y: none;
   // scroll-snap-stop: always;
   // scroll-padding-top: $nav-height;

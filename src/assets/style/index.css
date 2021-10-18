@@ -602,6 +602,8 @@ footer {
 html {
   background: #e7e7e7;
   scroll-behavior: smooth;
+  -ms-scroll-snap-type: y proximity;
+      scroll-snap-type: y proximity;
 }
 
 body {
