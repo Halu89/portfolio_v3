@@ -17,7 +17,7 @@
   "author": "Corentin Briand <corentin.briand@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "three": "^0.129.0"
+    "three": "^0.137.0"
   },
   "devDependencies": {
     "@11ty/eleventy": "^1.0.0",
